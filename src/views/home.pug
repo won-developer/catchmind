@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="ie=edge")
+        link(rel="icon" href="/images/favicon.ico")
+        link(rel="stylesheet" href="/static/styles/styles.css")
+        title Catch Mind
+    body
+        .body__container
+            main
+                .loginBox#loginBox
+                    form#loginForm
+                        input(type="text" placeholder="닉네임을 입력하세요")
+                .gameBox#gameBox
+                    .chatBox
+                        ul#chatBox
+                        form#chatSendForm
+                            input(type="text" placeholder="채팅을 입력하세요")
+        script.
+            window.events = !{JSON.stringify(events)};        
+        script(src="/socket.io/socket.io.js")
+        script(src="/static/js/main.js")

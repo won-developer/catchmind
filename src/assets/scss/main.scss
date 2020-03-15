@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+form {
+  width: 100%;
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 13px;
+    background: #74b9ff;
+    color: #fff;
+    &::placeholder {
+      color: #fff;
+    }
+  }
+}
