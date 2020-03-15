@@ -3553,86 +3553,14 @@ eval("/**\n * Copyright (c) 2014-present, Facebook, Inc.\n *\n * This source cod
 
 /***/ }),
 
-/***/ "./assets/js/chat.js":
-/*!***************************!*\
-  !*** ./assets/js/chat.js ***!
-  \***************************/
-/*! exports provided: handleNewMsg */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"handleNewMsg\", function() { return handleNewMsg; });\n/* harmony import */ var _sockets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sockets */ \"./assets/js/sockets.js\");\n\nvar chatBox = document.getElementById(\"chatBox\");\nvar chatSendForm = document.getElementById(\"chatSendForm\");\n\nvar addMsg = function addMsg(text, author) {\n  var nickname = author ? author : \"나\";\n  var li = document.createElement(\"li\");\n  var name = document.createElement(\"span\");\n  var txt = document.createElement(\"span\");\n  name.innerText = \"\".concat(nickname, \" : \");\n  name.className = \"author \".concat(author ? \"user\" : \"me\");\n  txt.innerText = text;\n  li.appendChild(name);\n  li.appendChild(txt);\n  chatBox.appendChild(li);\n};\n\nvar handleChatSendForm = function handleChatSendForm(e) {\n  e.preventDefault();\n  var input = chatSendForm.querySelector(\"input\");\n  var value = input.value;\n  var _window = window,\n      events = _window.events;\n  var socket = Object(_sockets__WEBPACK_IMPORTED_MODULE_0__[\"getSocket\"])();\n  socket.emit(events.sendMsg, {\n    value: value\n  });\n  input.value = \"\";\n  addMsg(value);\n};\n\nvar handleNewMsg = function handleNewMsg(_ref) {\n  var value = _ref.value,\n      nickname = _ref.nickname;\n  addMsg(value, nickname);\n};\nchatSendForm.addEventListener(\"submit\", handleChatSendForm);\n\n//# sourceURL=webpack:///./assets/js/chat.js?");
-
-/***/ }),
-
-/***/ "./assets/js/login.js":
-/*!****************************!*\
-  !*** ./assets/js/login.js ***!
-  \****************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sockets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sockets */ \"./assets/js/sockets.js\");\n\nvar loginBox = document.getElementById(\"loginBox\");\nvar gameBox = document.getElementById(\"gameBox\");\nvar loginForm = document.getElementById(\"loginForm\");\nvar nickname = localStorage.getItem(\"nickname\");\n\nvar login = function login(nickname, i) {\n  var socket = io(\"/\");\n  var _window = window,\n      events = _window.events;\n  socket.emit(events.setNickName, {\n    nickname: nickname\n  });\n\n  if (!i) {\n    loginBox.classList.remove(\"show\");\n    gameBox.classList.add(\"show\");\n  }\n\n  Object(_sockets__WEBPACK_IMPORTED_MODULE_0__[\"initSocket\"])(socket);\n};\n\nif (nickname === null) {\n  loginBox.classList.add(\"show\");\n} else {\n  gameBox.classList.add(\"show\");\n  login(nickname, true);\n}\n\nvar handleLoginForm = function handleLoginForm(e) {\n  e.preventDefault();\n  var input = loginForm.querySelector(\"input\");\n  var value = input.value;\n  input.value = \"\";\n  localStorage.setItem(\"nickname\", value);\n  login(value, false);\n};\n\nloginForm.addEventListener(\"submit\", handleLoginForm);\n\n//# sourceURL=webpack:///./assets/js/login.js?");
-
-/***/ }),
-
 /***/ "./assets/js/main.js":
 /*!***************************!*\
   !*** ./assets/js/main.js ***!
   \***************************/
 /*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./assets/scss/styles.scss\");\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./login */ \"./assets/js/login.js\");\n/* harmony import */ var _notifications__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./notifications */ \"./assets/js/notifications.js\");\n/* harmony import */ var _sockets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sockets */ \"./assets/js/sockets.js\");\n/* harmony import */ var _chat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chat */ \"./assets/js/chat.js\");\n/* harmony import */ var _paint__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./paint */ \"./assets/js/paint.js\");\n\n\n\n\n\n\n\n//# sourceURL=webpack:///./assets/js/main.js?");
-
-/***/ }),
-
-/***/ "./assets/js/notifications.js":
-/*!************************************!*\
-  !*** ./assets/js/notifications.js ***!
-  \************************************/
-/*! exports provided: handleNewUser, handleDisconnectUser */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"handleNewUser\", function() { return handleNewUser; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"handleDisconnectUser\", function() { return handleDisconnectUser; });\nvar body = document.querySelector(\"body\");\n\nvar createNotification = function createNotification(text, style) {\n  var box = document.createElement(\"div\");\n  box.className = \"notification\";\n  box.innerText = text;\n  box.style.backgroundColor = style;\n  body.appendChild(box);\n};\n\nvar removeNotification = function removeNotification() {\n  var notification = body.querySelectorAll(\".notification\");\n  notification.forEach(function (i) {\n    body.removeChild(i);\n  });\n};\n\nvar handleNewUser = function handleNewUser(_ref) {\n  var nickname = _ref.nickname;\n  console.log(\"\\uC811\\uC18D\\uD55C \\uC0AC\\uB78C \".concat(nickname));\n  removeNotification();\n  createNotification(\"\".concat(nickname, \"\\uB2D8\\uC774 \\uC811\\uC18D \\uD588\\uC5B4\\uC694 \\uD83D\\uDE45\"), \"#74b9ff\");\n};\nvar handleDisconnectUser = function handleDisconnectUser(_ref2) {\n  var nickname = _ref2.nickname;\n  console.log(\"\\uB098\\uAC04 \\uC0AC\\uB78C \".concat(nickname));\n  removeNotification();\n  createNotification(\"\".concat(nickname, \"\\uB2D8\\uC774 \\uB098\\uAC14\\uC5B4\\uC694 \\u26D4\"), \"#ff7675\");\n};\n\n//# sourceURL=webpack:///./assets/js/notifications.js?");
-
-/***/ }),
-
-/***/ "./assets/js/paint.js":
-/*!****************************!*\
-  !*** ./assets/js/paint.js ***!
-  \****************************/
-/*! exports provided: handleBeganPath, handleStrokedPath, handleFill */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"handleBeganPath\", function() { return handleBeganPath; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"handleStrokedPath\", function() { return handleStrokedPath; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"handleFill\", function() { return handleFill; });\n/* harmony import */ var _sockets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sockets */ \"./assets/js/sockets.js\");\n\nvar canvas = document.getElementById(\"canvas\");\nvar colors = document.querySelectorAll(\".controls__color\");\nvar fill = document.getElementById(\"fill\");\nvar brush = document.getElementById(\"brush\");\nvar range = document.getElementById(\"range\");\nvar save = document.getElementById(\"save\");\nvar ctx = canvas.getContext(\"2d\");\nvar _window = window,\n    events = _window.events;\nvar INIT = {\n  color: \"#000\",\n  width: 600,\n  height: 600\n};\nvar painting = false;\nvar filing = false;\n\nvar initCanvas = function initCanvas() {\n  canvas.width = INIT.width;\n  canvas.height = INIT.height;\n  ctx.fillStyle = \"#fff\";\n  ctx.fillRect(0, 0, INIT.width, INIT.height);\n  ctx.strokeStyle = INIT.color;\n  ctx.fillStyle = INIT.color;\n  ctx.lineWidth = range.value;\n};\n\nvar beginPath = function beginPath(x, y) {\n  ctx.beginPath();\n  ctx.moveTo(x, y);\n};\n\nvar strokePath = function strokePath(x, y, color) {\n  var currentColor = ctx.strokeStyle;\n\n  if (color) {\n    ctx.strokeStyle = color;\n  }\n\n  ctx.lineTo(x, y);\n  ctx.stroke();\n  ctx.strokeStyle = currentColor;\n};\n\nvar fillMode = function fillMode(color) {\n  var currentColor = ctx.fillStyle;\n\n  if (color) {\n    ctx.fillStyle = color;\n  }\n\n  ctx.fillRect(0, 0, INIT.width, INIT.height);\n  ctx.fillStyle = currentColor;\n};\n\nvar onMouseMove = function onMouseMove(e) {\n  var x = e.offsetX;\n  var y = e.offsetY;\n\n  if (!filing) {\n    if (!painting) {\n      beginPath(x, y);\n      Object(_sockets__WEBPACK_IMPORTED_MODULE_0__[\"getSocket\"])().emit(events.beginPath, {\n        x: x,\n        y: y\n      });\n    } else {\n      // 하위 경로의 마지막점을 x.y 좌표에 연결\n      strokePath(x, y);\n      Object(_sockets__WEBPACK_IMPORTED_MODULE_0__[\"getSocket\"])().emit(events.strokePath, {\n        x: x,\n        y: y,\n        color: ctx.strokeStyle\n      });\n    }\n  }\n};\n\nvar handleColorChange = function handleColorChange(e) {\n  var black = \"#000\";\n  var white = \"#fff\";\n  var red = \"#ff0000\";\n  var orange = \"#ffa500\";\n  var yellow = \"#ffff00\";\n  var green = \"#008000\";\n  var sky = \"#00dfff\";\n  var blue = \"#0000ff\";\n  var purple = \"#800080\";\n  var color = eval(e.target.classList[1]);\n  ctx.strokeStyle = color;\n  ctx.fillStyle = color;\n};\n\nvar handleRangeChange = function handleRangeChange(e) {\n  var value = e.target.value;\n  ctx.lineWidth = value;\n};\n\nvar handleFillMode = function handleFillMode() {\n  if (filing) {\n    fillMode();\n    Object(_sockets__WEBPACK_IMPORTED_MODULE_0__[\"getSocket\"])().emit(events.fill, {\n      color: ctx.fillStyle\n    });\n  }\n};\n\nvar handleSaveImage = function handleSaveImage() {\n  var img = canvas.toDataURL();\n  var link = document.createElement(\"a\");\n  link.href = img;\n  link.download = \"Your image\";\n  link.click();\n};\n\nvar stopPainting = function stopPainting() {\n  painting = false;\n};\n\nvar startPainting = function startPainting() {\n  painting = true;\n};\n\nvar handleBeganPath = function handleBeganPath(_ref) {\n  var x = _ref.x,\n      y = _ref.y;\n  beginPath(x, y);\n};\nvar handleStrokedPath = function handleStrokedPath(_ref2) {\n  var x = _ref2.x,\n      y = _ref2.y,\n      color = _ref2.color;\n  strokePath(x, y, color);\n};\nvar handleFill = function handleFill(_ref3) {\n  var color = _ref3.color;\n  fillMode(color);\n};\n\nif (canvas) {\n  initCanvas();\n  canvas.addEventListener(\"mousemove\", onMouseMove);\n  canvas.addEventListener(\"mousedown\", startPainting);\n  canvas.addEventListener(\"mouseup\", stopPainting);\n  canvas.addEventListener(\"mouseleave\", stopPainting);\n  canvas.addEventListener(\"click\", handleFillMode);\n  canvas.addEventListener(\"contextmenu\", function (e) {\n    e.preventDefault();\n  });\n  colors.forEach(function (color) {\n    color.addEventListener(\"click\", handleColorChange);\n  });\n  range.addEventListener(\"input\", handleRangeChange);\n  brush.addEventListener(\"click\", function () {\n    filing = false;\n  });\n  fill.addEventListener(\"click\", function () {\n    filing = true;\n  });\n  save.addEventListener(\"click\", handleSaveImage);\n}\n\n//# sourceURL=webpack:///./assets/js/paint.js?");
-
-/***/ }),
-
-/***/ "./assets/js/sockets.js":
-/*!******************************!*\
-  !*** ./assets/js/sockets.js ***!
-  \******************************/
-/*! exports provided: getSocket, initSocket */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getSocket\", function() { return getSocket; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"initSocket\", function() { return initSocket; });\n/* harmony import */ var _notifications__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notifications */ \"./assets/js/notifications.js\");\n/* harmony import */ var _chat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat */ \"./assets/js/chat.js\");\n/* harmony import */ var _paint__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./paint */ \"./assets/js/paint.js\");\n\n\n\nvar socket = null;\nvar getSocket = function getSocket() {\n  return socket;\n};\nvar initSocket = function initSocket(aSocket) {\n  var _window = window,\n      events = _window.events;\n  socket = aSocket;\n  socket.on(events.newUser, _notifications__WEBPACK_IMPORTED_MODULE_0__[\"handleNewUser\"]);\n  socket.on(events.disconnected, _notifications__WEBPACK_IMPORTED_MODULE_0__[\"handleDisconnectUser\"]);\n  socket.on(events.newMsg, _chat__WEBPACK_IMPORTED_MODULE_1__[\"handleNewMsg\"]);\n  socket.on(events.beganPath, _paint__WEBPACK_IMPORTED_MODULE_2__[\"handleBeganPath\"]);\n  socket.on(events.strokedPath, _paint__WEBPACK_IMPORTED_MODULE_2__[\"handleStrokedPath\"]);\n  socket.on(events.filled, _paint__WEBPACK_IMPORTED_MODULE_2__[\"handleFill\"]);\n};\n\n//# sourceURL=webpack:///./assets/js/sockets.js?");
-
-/***/ }),
-
-/***/ "./assets/scss/styles.scss":
-/*!*********************************!*\
-  !*** ./assets/scss/styles.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./assets/scss/styles.scss?");
+eval("throw new Error(\"Module build failed (from ../node_modules/babel-loader/lib/index.js):\\nError: Cannot find module '@babel/preset-en' from '/mnt/d/jeongeunwon/catchmind'\\n    at Function.resolveSync [as sync] (/mnt/d/jeongeunwon/catchmind/node_modules/resolve/lib/sync.js:81:15)\\n    at resolveStandardizedName (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/files/plugins.js:101:31)\\n    at resolvePreset (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/files/plugins.js:58:10)\\n    at loadPreset (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/files/plugins.js:77:20)\\n    at createDescriptor (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/config-descriptors.js:154:9)\\n    at /mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/config-descriptors.js:109:50\\n    at Array.map (<anonymous>)\\n    at createDescriptors (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/config-descriptors.js:109:29)\\n    at createPresetDescriptors (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/config-descriptors.js:101:10)\\n    at presets (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/config-descriptors.js:47:19)\\n    at mergeChainOpts (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/config-chain.js:320:26)\\n    at /mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/config-chain.js:283:7\\n    at Generator.next (<anonymous>)\\n    at buildRootChain (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/config-chain.js:120:29)\\n    at buildRootChain.next (<anonymous>)\\n    at loadPrivatePartialConfig (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/partial.js:95:62)\\n    at loadPrivatePartialConfig.next (<anonymous>)\\n    at Function.<anonymous> (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/partial.js:120:25)\\n    at Generator.next (<anonymous>)\\n    at evaluateSync (/mnt/d/jeongeunwon/catchmind/node_modules/gensync/index.js:244:28)\\n    at Function.sync (/mnt/d/jeongeunwon/catchmind/node_modules/gensync/index.js:84:14)\\n    at Object.<anonymous> (/mnt/d/jeongeunwon/catchmind/node_modules/@babel/core/lib/config/index.js:41:61)\\n    at Object.<anonymous> (/mnt/d/jeongeunwon/catchmind/node_modules/babel-loader/lib/index.js:144:26)\\n    at Generator.next (<anonymous>)\\n    at asyncGeneratorStep (/mnt/d/jeongeunwon/catchmind/node_modules/babel-loader/lib/index.js:3:103)\\n    at _next (/mnt/d/jeongeunwon/catchmind/node_modules/babel-loader/lib/index.js:5:194)\\n    at /mnt/d/jeongeunwon/catchmind/node_modules/babel-loader/lib/index.js:5:364\\n    at new Promise (<anonymous>)\\n    at Object.<anonymous> (/mnt/d/jeongeunwon/catchmind/node_modules/babel-loader/lib/index.js:5:97)\\n    at Object.loader (/mnt/d/jeongeunwon/catchmind/node_modules/babel-loader/lib/index.js:60:18)\");\n\n//# sourceURL=webpack:///./assets/js/main.js?");
 
 /***/ }),
 
