@@ -14,6 +14,15 @@ const socketController = socket => {
   socket.on(events.sendMsg, ({ value }) => {
     broadcast(events.newMsg, { value, nickname: socket.nickname });
   });
+  socket.on(events.beginPath, ({ x, y }) => {
+    broadcast(events.beganPath, { x, y });
+  });
+  socket.on(events.strokePath, ({ x, y, color }) => {
+    broadcast(events.strokedPath, { x, y, color });
+  });
+  socket.on(events.fill, ({ color }) => {
+    broadcast(events.filled, { color });
+  });
 };
 
 export default socketController;

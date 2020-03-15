@@ -4,7 +4,7 @@ const chatBox = document.getElementById("chatBox");
 const chatSendForm = document.getElementById("chatSendForm");
 
 const addMsg = (text, author) => {
-  const nickname = author ? author : "나ss";
+  const nickname = author ? author : "나";
   const li = document.createElement("li");
   const name = document.createElement("span");
   const txt = document.createElement("span");

@@ -30,9 +30,6 @@ table {
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
 
-body {
-  height: 100vh; }
-
 form {
   width: 100%; }
   form input {
@@ -40,6 +37,7 @@ form {
     outline: none;
     width: 100%;
     padding: 13px;
+    border-radius: 10px;
     background: #74b9ff;
     color: #fff; }
     form input::-webkit-input-placeholder {
@@ -55,10 +53,10 @@ form {
 
 .body__container {
   width: 100%;
-  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 30px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -69,26 +67,38 @@ form {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center; }
+  .body__container header {
+    margin-bottom: 30px; }
+    .body__container header h1 {
+      background: #74b9ff;
+      padding: 15px;
+      border-radius: 30px;
+      font-size: 2rem;
+      color: #fff; }
   .body__container main .loginBox {
     display: none; }
     .body__container main .loginBox.show {
       display: block; }
   .body__container main .gameBox {
     display: none; }
+    .body__container main .gameBox .canvasBox {
+      margin-right: 50px; }
     .body__container main .gameBox .chatBox {
       font-size: 18px;
       padding: 15px;
-      -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-              box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 15px; }
       .body__container main .gameBox .chatBox ul {
-        width: 300px;
-        height: 800px; }
+        width: 250px;
+        height: 95%; }
         .body__container main .gameBox .chatBox ul li .author.user {
           color: red; }
         .body__container main .gameBox .chatBox ul li .author.me {
           color: blue; }
     .body__container main .gameBox.show {
-      display: block; }
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex; }
 
 @-webkit-keyframes notification {
   0% {
@@ -120,4 +130,93 @@ form {
   color: #fff;
   -webkit-animation: notification 2.5s ease-in-out forwards;
           animation: notification 2.5s ease-in-out forwards; }
+
+.controls__color.black {
+  background: #000; }
+
+.controls__color.white {
+  background: #fff; }
+
+.controls__color.red {
+  background: #ff0000; }
+
+.controls__color.orange {
+  background: #ffa500; }
+
+.controls__color.yellow {
+  background: #ffff00; }
+
+.controls__color.green {
+  background: #008000; }
+
+.controls__color.sky {
+  background: #00dfff; }
+
+.controls__color.blue {
+  background: #0000ff; }
+
+.controls__color.purple {
+  background: #800080; }
+
+.canvasBox .canvas {
+  width: 600px;
+  height: 600px;
+  background-color: #fff;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.3); }
+
+.canvasBox .controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .canvasBox .controls .controls__buttons,
+  .canvasBox .controls .controls__range {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 15px; }
+  .canvasBox .controls .controls__buttons button {
+    all: unset;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24); }
+    .canvasBox .controls .controls__buttons button:active {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9); }
+    .canvasBox .controls .controls__buttons button:not(:last-child) {
+      margin-right: 10px; }
+  .canvasBox .controls .controls__colors {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+    .canvasBox .controls .controls__colors .controls__color {
+      width: 50px;
+      height: 50px;
+      border-radius: 25px;
+      cursor: pointer;
+      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+      .canvasBox .controls .controls__colors .controls__color:not(:last-child) {
+        margin-right: 10px; }
 

@@ -9,11 +9,33 @@ html(lang="en")
         title Catch Mind
     body
         .body__container
+            header
+                h1 캐치 마인드
             main
                 .loginBox#loginBox
                     form#loginForm
                         input(type="text" placeholder="닉네임을 입력하세요")
                 .gameBox#gameBox
+                    .canvasBox
+                        canvas#canvas.canvas
+                        .controls
+                            .controls__range
+                                input(type="range" id="range" min="1" max="10" step="1" value="3")
+                            .controls__buttons
+                                button#fill 채우기
+                                button#brush 브러쉬
+                                button#save 저장
+                            .controls__colors
+                                .controls__color.black
+                                .controls__color.white
+                                .controls__color.red
+                                .controls__color.orange
+                                .controls__color.yellow
+                                .controls__color.green
+                                .controls__color.sky
+                                .controls__color.blue
+                                .controls__color.purple
+
                     .chatBox
                         ul#chatBox
                         form#chatSendForm

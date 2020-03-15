@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-body {
-  height: 100vh;
-}
-
 form {
   width: 100%;
   input {
@@ -13,6 +9,7 @@ form {
     outline: none;
     width: 100%;
     padding: 13px;
+    border-radius: 10px;
     background: #74b9ff;
     color: #fff;
     &::placeholder {
